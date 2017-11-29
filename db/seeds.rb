@@ -49,11 +49,19 @@ end
   )
 end
 
-user = User.first
-user.update_attributes!(
-  email: 'xieliming2006@hotmail.com', # replace this with your personal email
-  password: '12345678'
+admin = User.create!(
+  name:     'Admin User',
+  email:    'admin@example.com',
+  password: 'helloworld',
+  role:     'admin'
 )
+
+member = User.create!(
+  name:     'Member User',
+  email:    'member@example.com',
+  password: 'helloworld'
+)
+
 puts "Seed finished"
 puts "#{User.count} users created"
 puts "#{Topic.count} topics created"
