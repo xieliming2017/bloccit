@@ -10,7 +10,6 @@ class VotesController < ApplicationController
     update_vote(-1)
     redirect_back(fallback_location: :root)
   end
-  
   private
   def update_vote(new_value)
     @post = Post.find(params[:post_id])
