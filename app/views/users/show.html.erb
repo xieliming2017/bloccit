@@ -19,9 +19,25 @@
   </div>
 </div>
 
-// #12
-<h2>Posts</h2>
-<%= render @user.posts %>
+<% if user_has_any_posts_or_comments?(@user) == true %>
+  <h2>Posts</h2>
+  <%= render @user.posts %>
 
-<h2>Comments</h2>
-<%= render @user.comments %>
+  <h2>Comments</h2>
+  <%= render @user.comments %>
+
+  <h2>Favorites</h2>
+  <div class="col row">
+    <div class="col-md-8">
+      <% @user.favorites.each do |favorite| %>
+        <div class="col-md-4">
+          <li><%= image_tag current_user.avatar_url(48) %></li>
+          <%= "#{favorite.post.votes.count} votes #{favorite.post.comments.count} comments" %>
+        </div>
+        <%=render favorite.post%>
+      <% end%>
+    </div>
+  </div>
+<% else %>
+  <h2><%= "#{@user.name} has not submitted andy posts yet." %></h2>
+<% end %>
