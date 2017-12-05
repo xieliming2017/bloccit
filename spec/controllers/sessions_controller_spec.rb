@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe SessionsController, type: :controller do
-  let(:my_user) { User.create!(name: "Blochead", email: "blochead@bloc.io", password: "password") }
+  let(:my_user) { create(:user) }
 
   describe "GET new" do
     it "returns http success" do
@@ -28,7 +28,7 @@ RSpec.describe SessionsController, type: :controller do
 
     it "flashes #error with bad email address" do
       post :create, params: { session: { email: "does not exist" } }
-      expect(flash.now[:alert]).to be_present
+      expect(flash.now[:notice]).to be_present
     end
 
     it "renders #new with bad email address" do
